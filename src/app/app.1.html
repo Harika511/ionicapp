@@ -1,0 +1,157 @@
+<ion-menu [content]="content" side="left" class="side-menu" id="menu1">
+    <ion-header>
+        <ion-toolbar>
+          <ion-title>Left Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    
+
+  <ion-content>
+    <ion-list>
+      <ion-item ion-item *ngFor="let p of pages;  let i=index" (click)="openPage(p, i);">
+        <ion-row>
+          <!-- Parent Pages  -->
+          <ion-col col-9 class="menu-name">
+            <span ion-text>
+              {{p.Ad}}
+              <ion-icon [name]="selectedMenu == i? 'arrow-down' : 'arrow-forward'" *ngIf="p.Alst" float-right></ion-icon>
+            </span>
+
+            <!-- Child Pages  -->
+            <ion-list no-lines [hidden]="selectedMenu != i">
+              <ion-item menuClose="menu1" no-border *ngFor="let subPage of p.Alst;let i2=index" text-wrap (click)="openPage(subPage)">
+                <ion-row>
+                  <ion-col  col-10 class="menu-name"><span ion-text color="color2">&nbsp;{{subPage.Bd}}</span></ion-col>
+                </ion-row>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-menu [content]="content" side="right" class="side-menu" id="menu2">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Right Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content>
+      <ion-list>
+        <ion-item ion-item  menuClose="menu2">
+          <ion-row>
+            My Profile
+          </ion-row>
+         
+        </ion-item>
+        <ion-item ion-item menuClose="menu2">
+            <ion-row>
+              Login
+            </ion-row>
+            
+          </ion-item>
+  
+          <ion-item ion-item menuClose="menu2">
+              <ion-row>
+                SignUp
+              </ion-row>
+             
+            </ion-item>
+            <ion-item ion-item menuClose="menu2">
+                <ion-row>
+                  WISH
+                </ion-row>
+                
+              </ion-item>
+             <ion-item ion-item menuClose="menu2">
+              <ion-row>
+                Cart
+              </ion-row>
+             
+            </ion-item>
+            <ion-item ion-item menuClose="menu2">
+                <ion-row>
+                  My Orders
+                </ion-row>
+                
+              </ion-item>
+              <ion-item ion-item menuClose="menu2">
+                  <ion-row>
+                    Favorites
+                  </ion-row>
+                 
+                </ion-item>
+              <ion-item ion-item menuClose="menu2">
+              <ion-row>
+                Store Info
+              </ion-row>
+             
+            </ion-item>
+            <ion-item ion-item menuClose="menu2">
+                <ion-row>
+                  Customer Support
+                </ion-row>
+                
+              </ion-item>
+              
+            <ion-item ion-item menuClose="menu2">
+                <ion-row>
+                  About
+                </ion-row>
+                
+              </ion-item>
+
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  <ion-nav [root]="rootPage" #content  swipeBackEnabled="false"></ion-nav>
+  <ion-header>
+      <ion-navbar primary>
+        <button ion-button menuToggle="left" start>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+          HomePage
+        </ion-title>
+       
+        <ion-buttons  right>
+            <button (click)="search()">
+                <ion-icon name="search"></ion-icon>
+              </button>
+              <button class="nav-item"
+             >  
+                
+                <ion-icon name="heart"></ion-icon>
+                  
+                </button>
+                <button >
+                    <ion-icon name="cart"></ion-icon>
+                  </button>
+                  <button >
+                      <ion-icon name="notifications"></ion-icon>
+                    </button>
+           
+        </ion-buttons>
+
+        <button ion-button menuToggle="right" end>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-navbar>
+    </ion-header>
+    
+    <ion-content padding>
+      <p>Displaying Home page</p>
+      <router-outlet></router-outlet>
+      <ion-note item-start>
+          Left Note
+        </ion-note>
+    </ion-content>
+<!-- <ion-menu [content]="content" side="right" id="menu2"></ion-menu> -->
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
